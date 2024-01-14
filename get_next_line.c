@@ -6,7 +6,7 @@
 /*   By: tbabou <tbabou@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 22:32:27 by tbabou            #+#    #+#             */
-/*   Updated: 2024/01/14 20:17:33 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/01/14 20:18:36 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,25 +82,4 @@ char	*get_next_line(int fd)
 	if (!line || line[0] == '\0')
 		return (NULL);
 	return (line);
-}
-
-int	main(void)
-{
-	int		fd;
-	char	*line;
-
-	printf("Current buffer_size => %i \n", BUFFER_SIZE);
-	fd = open("text.txt", O_RDONLY);
-	line = get_next_line(fd);
-	printf("==== RESULT ====\n");
-	printf("=> %s\n", line);
-	line = get_next_line(fd);
-	printf("=> %s\n", line);
-	line = get_next_line(fd);
-	printf("=> %s\n", line);
-	line = get_next_line(fd);
-	if (!line)
-		printf("=> NULL");
-	else
-		printf("=> %s\n", line);
 }
