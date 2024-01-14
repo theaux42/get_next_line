@@ -6,7 +6,7 @@
 /*   By: tbabou <tbabou@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 22:32:27 by tbabou            #+#    #+#             */
-/*   Updated: 2024/01/12 23:50:20 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/01/14 19:48:47 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,14 @@ char	*ft_strrchr(const char *s, int c)
 	while (s && s[i])
 	{
 		if (s[i] == (char)c)
-			res = (char *)&s[i];
+		{
+			res = (char *)&s[i];		
+			break ;
+		}
 		i++;
 	}
 	if (s[i] == c)
-		res = (char *)&s[i];
+		res = (char *)&s[i + 1];
 	return (res);
 }
 
