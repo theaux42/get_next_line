@@ -6,7 +6,7 @@
 /*   By: tbabou <tbabou@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 22:32:27 by tbabou            #+#    #+#             */
-/*   Updated: 2024/01/14 20:18:36 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/01/14 23:44:35 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*ft_cleanup(char *str)
 	i = 0;
 	while (str[len] && str[len] != '\n')
 		len++;
-	returned = (char *)malloc(len + 1);
+	returned = (char *)malloc(len - 1);
 	if (!returned)
 		return (NULL);
 	while (i < len)
@@ -44,7 +44,7 @@ char	*ft_cleanup(char *str)
 		returned[i] = str[i];
 		i++;
 	}
-	returned[i + 1] = '\n';
+	returned[i + 1] = '\0';
 	return (returned);
 }
 
@@ -67,6 +67,7 @@ char	*get_line(int fd)
 		if (amount != BUFFER_SIZE)
 			break ;
 	}
+	free(line);
 	line = ft_cleanup(ft_strdup(stash));
 	stash = ft_strrchr(stash, '\n');
 	return (line);
