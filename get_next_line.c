@@ -6,11 +6,47 @@
 /*   By: tbabou <tbabou@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 22:32:27 by tbabou            #+#    #+#             */
-/*   Updated: 2024/01/14 20:14:28 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/01/14 20:17:33 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+int	isnewline(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+char	*ft_cleanup(char *str)
+{
+	char	*returned;
+	int		len;
+	int		i;
+
+	len = 0;
+	i = 0;
+	while (str[len] && str[len] != '\n')
+		len++;
+	returned = (char *)malloc(len + 1);
+	if (!returned)
+		return (NULL);
+	while (i < len)
+	{
+		returned[i] = str[i];
+		i++;
+	}
+	returned[i + 1] = '\n';
+	return (returned);
+}
 
 char	*get_line(int fd)
 {
@@ -46,4 +82,25 @@ char	*get_next_line(int fd)
 	if (!line || line[0] == '\0')
 		return (NULL);
 	return (line);
+}
+
+int	main(void)
+{
+	int		fd;
+	char	*line;
+
+	printf("Current buffer_size => %i \n", BUFFER_SIZE);
+	fd = open("text.txt", O_RDONLY);
+	line = get_next_line(fd);
+	printf("==== RESULT ====\n");
+	printf("=> %s\n", line);
+	line = get_next_line(fd);
+	printf("=> %s\n", line);
+	line = get_next_line(fd);
+	printf("=> %s\n", line);
+	line = get_next_line(fd);
+	if (!line)
+		printf("=> NULL");
+	else
+		printf("=> %s\n", line);
 }

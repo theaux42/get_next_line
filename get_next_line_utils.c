@@ -6,7 +6,7 @@
 /*   By: tbabou <tbabou@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 22:32:27 by tbabou            #+#    #+#             */
-/*   Updated: 2024/01/14 19:48:47 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/01/14 20:17:44 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*ft_strrchr(const char *s, int c)
 	{
 		if (s[i] == (char)c)
 		{
-			res = (char *)&s[i];		
+			res = (char *)&s[i];
 			break ;
 		}
 		i++;
@@ -82,45 +82,9 @@ char	*ft_strrchr(const char *s, int c)
 	return (res);
 }
 
-int	isnewline(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '\n')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-char	*ft_cleanup(char *str)
-{
-	char	*returned;
-	int		len;
-	int		i;
-
-	len = 0;
-	i = 0;
-	while (str[len] && str[len] != '\n')
-		len++;
-	returned = (char *)malloc(len + 1);
-	if (!returned)
-		return (NULL);
-	while (i < len)
-	{
-		returned[i] = str[i];
-		i++;
-	}
-	returned[i + 1] = '\n';
-	return (returned);
-}
-
 void	*ft_memset(void *b, int c, size_t len)
 {
-	char *str;
+	char	*str;
 
 	str = b;
 	while (len)
