@@ -6,7 +6,7 @@
 /*   By: tbabou <tbabou@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 22:32:27 by tbabou            #+#    #+#             */
-/*   Updated: 2024/01/14 23:44:35 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/01/15 01:58:36 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ char	*ft_cleanup(char *str)
 	i = 0;
 	while (str[len] && str[len] != '\n')
 		len++;
-	returned = (char *)malloc(len - 1);
+	len++;
+	returned = (char *)malloc(len);
 	if (!returned)
 		return (NULL);
 	while (i < len)
@@ -44,7 +45,6 @@ char	*ft_cleanup(char *str)
 		returned[i] = str[i];
 		i++;
 	}
-	returned[i + 1] = '\0';
 	return (returned);
 }
 
@@ -56,9 +56,9 @@ char	*get_line(int fd)
 	int			amount;
 
 	amount = 0;
-	line = ft_strdup("");
 	if (!stash)
 		stash = ft_strdup("");
+	line = ft_strdup("");
 	while (!isnewline(stash))
 	{
 		ft_memset(buffer, '\0', BUFFER_SIZE);
@@ -68,8 +68,11 @@ char	*get_line(int fd)
 			break ;
 	}
 	free(line);
+	line = ft_strdup("");
 	line = ft_cleanup(ft_strdup(stash));
 	stash = ft_strrchr(stash, '\n');
+	// if (line[0] != '\0' && amount == BUFFER_SIZE)
+	// 	line[ft_strlen(line)] = '\n';
 	return (line);
 }
 
@@ -77,10 +80,29 @@ char	*get_next_line(int fd)
 {
 	char	*line;
 
-	if (BUFFER_SIZE < 0 || fd < 0)
+	if (BUFFER_SIZE < 1 || fd < 0)
+		return (NULL);
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	line = get_line(fd);
 	if (!line || line[0] == '\0')
 		return (NULL);
 	return (line);
+}
+
+int	main(void)
+{
+	int		fd;
+	int		i;
+	char	*line;
+
+	i = 0;
+	fd = open("text.txt", O_RDONLY);
+	line = get_next_line(fd);
+	while (line)
+	{
+		printf("[%i] => %s", i, line);
+		line = get_next_line(fd);
+		i++;
+	}
 }
