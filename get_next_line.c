@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbabou <tbabou@42.fr>                      +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 22:32:27 by tbabou            #+#    #+#             */
-/*   Updated: 2024/01/15 01:58:36 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/01/15 13:24:30 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*get_line(int fd)
 {
 	static char	*stash;
 	char		*line;
-	char		buffer[BUFFER_SIZE];
+	char		buffer[BUFFER_SIZE + 1];
 	int			amount;
 
 	amount = 0;
@@ -61,7 +61,7 @@ char	*get_line(int fd)
 	line = ft_strdup("");
 	while (!isnewline(stash))
 	{
-		ft_memset(buffer, '\0', BUFFER_SIZE);
+		ft_memset(buffer, '\0', BUFFER_SIZE + 1);
 		amount = read(fd, buffer, BUFFER_SIZE);
 		stash = ft_strjoin(stash, buffer);
 		if (amount != BUFFER_SIZE)
@@ -93,16 +93,13 @@ char	*get_next_line(int fd)
 int	main(void)
 {
 	int		fd;
-	int		i;
 	char	*line;
 
-	i = 0;
 	fd = open("text.txt", O_RDONLY);
 	line = get_next_line(fd);
 	while (line)
 	{
-		printf("[%i] => %s", i, line);
+		printf("%s",line);
 		line = get_next_line(fd);
-		i++;
 	}
 }
