@@ -6,7 +6,7 @@
 /*   By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 22:32:27 by tbabou            #+#    #+#             */
-/*   Updated: 2024/01/17 18:09:07 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/01/17 20:31:22 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	isnewline(char *str)
 	return (0);
 }
 
-int		get_final_size(char *s1, char *s2, char *buffer)
+int	get_final_size(char *s1, char *s2, char *buffer)
 {
 	int	size;
 
@@ -58,14 +58,14 @@ int		get_final_size(char *s1, char *s2, char *buffer)
 	else
 	{
 		size = ft_strlen(s2);
-		ft_strlcpy(buffer, "", BUFFER_SIZE + 1);
+		ft_strlcpy(buffer, "", BUFFER_SIZE +1);
 	}
 	return (size);
 }
 
 char	*get_line(int fd)
 {
-	static char buffer[FD_SIZE][BUFFER_SIZE + 1];
+	static char	buffer[FD_SIZE][BUFFER_SIZE + 1];
 	char		*line;
 	char		*new_line;
 	int			amount;
@@ -98,31 +98,3 @@ char	*get_next_line(int fd)
 		return (NULL);
 	return (line);
 }
-
-// int	main(void)
-// {
-// 	int		fd;
-// 	char	*line;
-
-// 	fd = open("text.txt", O_RDONLY);
-// 	int fd2 = open("text2.txt", O_RDONLY);
-// 	int i = -1;
-// 	while (++i < 15)
-// 	{
-// 		line = get_next_line(fd);
-// 		if (!line || !*line) {
-// 			free(line);
-// 			break;
-// 		}
-// 		printf("file1 -> %s", line);
-// 		free(line);
-// 		line = get_next_line(fd2);
-// 		if (!line || !*line) {
-// 			free(line);
-// 			break;
-// 		}
-// 		printf("file2 -> %s", line);
-// 		free(line);
-// 		// break;
-// 	}
-// }

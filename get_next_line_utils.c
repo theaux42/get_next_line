@@ -6,7 +6,7 @@
 /*   By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 22:32:27 by tbabou            #+#    #+#             */
-/*   Updated: 2024/01/17 18:10:08 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/01/17 19:56:07 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	char	*temp;
 	char	*p;
 
-	
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
 	tab = (char *)malloc((ft_strlen(s1) + ft_strlen(s2)) * sizeof(char) + 1);

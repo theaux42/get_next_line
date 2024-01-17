@@ -6,7 +6,7 @@
 /*   By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 22:32:27 by tbabou            #+#    #+#             */
-/*   Updated: 2024/01/17 18:10:14 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/01/17 19:57:22 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	isnewline(char *str)
 	return (0);
 }
 
-int		get_final_size(char *s1, char *s2, char *buffer)
+int	get_final_size(char *s1, char *s2, char *buffer)
 {
 	int	size;
 
@@ -65,24 +65,24 @@ int		get_final_size(char *s1, char *s2, char *buffer)
 
 char	*get_line(int fd)
 {
-	static char buffer[FD_SIZE][BUFFER_SIZE + 1];
+	static char	buffer[BUFFER_SIZE + 1];
 	char		*line;
 	char		*new_line;
 	int			amount;
 	int			final_size;
 
 	amount = BUFFER_SIZE;
-	line = ft_strdup(buffer[fd]);
-	while (!isnewline(buffer[fd]) && (amount == BUFFER_SIZE || amount > 0))
+	line = ft_strdup(buffer);
+	while (!isnewline(buffer) && (amount == BUFFER_SIZE || amount > 0))
 	{
-		amount = read(fd, buffer[fd], BUFFER_SIZE);
-		buffer[fd][amount] = '\0';
-		line = ft_strjoin(line, buffer[fd]);
+		amount = read(fd, buffer, BUFFER_SIZE);
+		buffer[amount] = '\0';
+		line = ft_strjoin(line, buffer);
 	}
 	if (!ft_strlen(line))
 		return (free(line), NULL);
 	new_line = ft_strrchr(line, '\n');
-	final_size = get_final_size(new_line, line, buffer[fd]);
+	final_size = get_final_size(new_line, line, buffer);
 	line[final_size] = '\0';
 	return (line);
 }
@@ -98,31 +98,3 @@ char	*get_next_line(int fd)
 		return (NULL);
 	return (line);
 }
-
-// int	main(void)
-// {
-// 	int		fd;
-// 	char	*line;
-
-// 	fd = open("text.txt", O_RDONLY);
-// 	int fd2 = open("text2.txt", O_RDONLY);
-// 	int i = -1;
-// 	while (++i < 15)
-// 	{
-// 		line = get_next_line(fd);
-// 		if (!line || !*line) {
-// 			free(line);
-// 			break;
-// 		}
-// 		printf("file1 -> %s", line);
-// 		free(line);
-// 		line = get_next_line(fd2);
-// 		if (!line || !*line) {
-// 			free(line);
-// 			break;
-// 		}
-// 		printf("file2 -> %s", line);
-// 		free(line);
-// 		// break;
-// 	}
-// }

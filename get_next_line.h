@@ -6,7 +6,7 @@
 /*   By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 22:32:12 by tbabou            #+#    #+#             */
-/*   Updated: 2024/01/17 18:06:22 by tbabou           ###   ########.fr       */
+/*   Updated: 2024/01/17 19:56:36 by tbabou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,6 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 4200
-# endif
-
-# ifndef FD_SIZE
-#  define FD_SIZE 10000
 # endif
 
 int		isnewline(char *str);
